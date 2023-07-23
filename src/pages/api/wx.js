@@ -1,5 +1,9 @@
 export default async function handler(req, res) {
-  const id = "kaus"; //TODO: hardcoded for dev
+  if (req.method !== "GET") {
+    res.status(405).send("Method not allowed.");
+  }
+
+  const { id } = req.query;
   const url = `https://qa.foreflight.com/weather/report/${id}`;
   const controller = new AbortController();
   const signal = controller.signal;
@@ -21,8 +25,11 @@ export default async function handler(req, res) {
     }
 
     const data = await response.json();
-    console.log(data);
-    res.status(200).json({ data });
+    const {
+      report: { conditions, forecast },
+    } = data;
+
+    res.status(200).json({ conditions, forecast });
   } catch (error) {
     console.error(`There was an error fetching from the API. ERROR: ${error}`);
     res.status(500);
