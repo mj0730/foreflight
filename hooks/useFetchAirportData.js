@@ -6,7 +6,7 @@ export default function useFetchAirports(id) {
   const [fetchError, setFetchError] = useState(null);
   const [shouldRefresh, setShouldRefresh] = useState({ id: id });
 
-  const url = `/api/airports?${id}`;
+  const url = `/api/airports?id=${id}`;
 
   useEffect(() => {
     if (!shouldRefresh.id || id === null) {

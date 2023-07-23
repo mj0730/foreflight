@@ -6,7 +6,7 @@ export default function useFetchWx(id) {
   const [fetchError, setFetchError] = useState(null);
   const [shouldRefresh, setShouldRefresh] = useState({ id: id });
 
-  const url = `/api/wx?${id}`;
+  const url = `/api/wx?id=${id}`;
 
   useEffect(() => {
     if (!shouldRefresh.id || id === null) {

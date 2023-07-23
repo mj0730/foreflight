@@ -20,7 +20,7 @@ export default async function handler(req, res) {
 
     if (!response.ok) {
       throw new Error(
-        `There was an error fetching from ${url}. Response: ${response}`,
+        `There was an error fetching from ${url}. Response: ${response.status}`,
       );
     }
 

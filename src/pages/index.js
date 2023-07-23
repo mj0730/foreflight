@@ -1,9 +1,21 @@
 import Head from "next/head";
-import { Inter } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+import useFetchAirports from "../../hooks/useFetchAirportData";
+import useFetchWx from "../../hooks/useFetchWx";
 
 export default function Home() {
+  // const {
+  //   data: airportData,
+  //   fetchError: airportFetchError,
+  //   isLoading: airportDataIsLoading,
+  // } = useFetchAirports("kaus");
+  // const {
+  //   data: wxData,
+  //   fetchError: wxFetchError,
+  //   isLoading: wxIsLoading,
+  // } = useFetchWx("KAUS");
+  // console.log(airportData, wxData);
+
   return (
     <>
       <Head>
