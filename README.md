@@ -1,38 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
-First, run the development server:
+First, install the required packages:
+
+```bash
+npm install
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Q & A
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+How much time was spent developing?
+Approximately 6 hours, with a rough breakdown as follows: 1 hr planning, setting up the project, and getting familiar with the FF API; four hours developing a working prototype; and one hour improving the display and styling, addressing edgecases and bugs.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+What improvements would you make?
+Given more time, harden the API routes and address error handling more throughly. There is some very basic error handling, to show an error retrieving an unknown airport, for example, but it could be improved. Design/styling improvements, UX improvements, and implementing testing.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Additionally, parts of the UI were stubbed out but have no current functionality. EX: links in the nav bar. A feature that was used during development, but removed for the final version was auto-complete for the search bar. It was removed for time constraints, and the reliance on a third-party api that had limited usage.
 
-## Learn More
+## Deployed App
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+There's a deployed version of the app available at: [https://foreflight.vercel.app/](https://foreflight.vercel.app/).

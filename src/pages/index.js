@@ -9,7 +9,6 @@ import NavHeader from "../components/NavHeader";
 export default function Home() {
   const [searchId, setSearchId] = useState("");
   const [airportData, setAirportData] = useState({});
-  console.log(searchId);
 
   return (
     <>

@@ -29,7 +29,7 @@ export default function Main({ id, setAirportData }) {
   }, [airportDataIsLoading, airportData, setAirportData]);
 
   const { conditions, forecast } = wxData;
-  console.log(airportFetchError);
+
   if (airportFetchError) {
     return (
       <Alert
