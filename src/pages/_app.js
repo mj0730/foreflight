@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }) {
         colorScheme: "dark",
       }}
     >
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </MantineProvider>
   );
 }
