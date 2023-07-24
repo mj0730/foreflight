@@ -25,7 +25,7 @@ export default function Home() {
       <NavHeader
         links={[
           { label: "Airport Data", link: "/" },
-          { label: "Weather", link: "wx" },
+          { label: "METAR", link: "metar" },
         ]}
         setSearchId={setSearchId}
       />
