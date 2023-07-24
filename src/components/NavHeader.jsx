@@ -1,13 +1,55 @@
 import {
+  Avatar,
   createStyles,
   Header,
-  Autocomplete,
   Group,
-  Burger,
+  TextInput,
   rem,
 } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import { IconSearch } from "@tabler/icons-react";
+
+export default function NavHeader({ links, searchId, setSearchId }) {
+  const { classes } = useStyles();
+
+  const items = links.map((link) => (
+    <a
+      key={link.label}
+      href={link.link}
+      className={classes.link}
+      onClick={(event) => event.preventDefault()}
+    >
+      {link.label}
+    </a>
+  ));
+
+  return (
+    <Header height={56} className={classes.header} mb={60}>
+      <div className={classes.inner}>
+        <Group>
+          <Avatar src="fffavicon.webp" />
+          ForeFlight CX
+        </Group>
+
+        <Group>
+          <Group ml={50} spacing={5} className={classes.links}>
+            {items}
+          </Group>
+          <TextInput
+            className={classes.search}
+            placeholder="Search"
+            icon={<IconSearch size="1rem" stroke={1.5} />}
+            value={searchId}
+            onChange={(e) => {
+              if (e.target.value.length <= 4) {
+                return setSearchId(e.target.value);
+              }
+            }}
+          />
+        </Group>
+      </div>
+    </Header>
+  );
+}
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -55,49 +97,3 @@ const useStyles = createStyles((theme) => ({
     },
   },
 }));
-
-export default function NavHeader({ links, setSearchId }) {
-  const [opened, { toggle }] = useDisclosure(false);
-  const { classes } = useStyles();
-
-  const items = links.map((link) => (
-    <a
-      key={link.label}
-      href={link.link}
-      className={classes.link}
-      onClick={(event) => event.preventDefault()}
-    >
-      {link.label}
-    </a>
-  ));
-
-  return (
-    <Header height={56} className={classes.header} mb={60}>
-      <div className={classes.inner}>
-        <Group>
-          <Burger opened={opened} onClick={toggle} size="sm" />
-          ForeFlight CX
-        </Group>
-
-        <Group>
-          <Group ml={50} spacing={5} className={classes.links}>
-            {items}
-          </Group>
-          <Autocomplete
-            className={classes.search}
-            placeholder="Search"
-            icon={<IconSearch size="1rem" stroke={1.5} />}
-            limit={5}
-            onItemSubmit={setSearchId}
-            data={["kaus", "kden", "kjfk"]}
-            transitionProps={{
-              transition: "slide-down",
-              duration: 80,
-              timingFunction: "ease",
-            }}
-          />
-        </Group>
-      </div>
-    </Header>
-  );
-}

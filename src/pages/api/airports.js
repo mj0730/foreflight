@@ -33,6 +33,6 @@ export default async function handler(req, res) {
     res.status(200).json({ faaCode, name, latitude, longitude, runways });
   } catch (error) {
     console.error(`There was an error fetching from the API. ERROR: ${error}`);
-    res.status(500);
+    res.status(500).send();
   }
 }

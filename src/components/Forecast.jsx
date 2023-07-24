@@ -3,14 +3,14 @@ import { Code, Text, Title, Stack } from "@mantine/core";
 export default function Forecast({ data }) {
   const [current, forecast1, forecast2] = data.conditions;
   const period1 = {
-    windSpeed: String(Math.trunc(forecast1.wind.speedKts)).padStart(2, "0"),
-    windDir: forecast1.wind.variable ? "VRB" : forecast1.wind.direction,
-    time: timeDiff(forecast1.period.dateStart),
+    windSpeed: String(Math.trunc(forecast1?.wind.speedKts)).padStart(2, "0"),
+    windDir: forecast1?.wind.variable ? "VRB" : forecast1?.wind.direction,
+    time: timeDiff(forecast1?.period.dateStart),
   };
   const period2 = {
-    windSpeed: String(Math.trunc(forecast2.wind.speedKts)).padStart(2, "0"),
-    windDir: forecast2.wind.variable ? "VRB" : forecast2.wind.direction,
-    time: timeDiff(forecast2.period.dateStart),
+    windSpeed: String(Math.trunc(forecast2?.wind.speedKts)).padStart(2, "0"),
+    windDir: forecast2?.wind.variable ? "VRB" : forecast2?.wind.direction,
+    time: timeDiff(forecast2?.period.dateStart),
   };
 
   return (
@@ -20,22 +20,34 @@ export default function Forecast({ data }) {
       </Title>
       <Stack justify="flex-start" spacing="lg" h={300}>
         <div>
-          Becoming in{" "}
-          <Text span fw={700}>
-            {period1.time}
-          </Text>
-          <div>
-            <Code>Wind: {`${period1.windDir}${period1.windSpeed}`}</Code>
-          </div>
+          {!!forecast1?.wind ? (
+            <>
+              Becoming in{" "}
+              <Text span fw={700}>
+                {period1.time}
+              </Text>
+              <div>
+                <Code>Wind: {`${period1.windDir}${period1.windSpeed}`}</Code>
+              </div>
+            </>
+          ) : (
+            "Not Available"
+          )}
         </div>
         <div>
-          Becoming in{" "}
-          <Text span fw={700}>
-            {period2.time}
-          </Text>
-          <div>
-            <Code>Wind: {`${period2.windDir}${period2.windSpeed}`}</Code>
-          </div>
+          {!!forecast2?.wind ? (
+            <>
+              Becoming in{" "}
+              <Text span fw={700}>
+                {period2.time}
+              </Text>
+              <div>
+                <Code>Wind: {`${period2.windDir}${period2.windSpeed}`}</Code>
+              </div>
+            </>
+          ) : (
+            "Not Available"
+          )}
         </div>
       </Stack>
     </section>

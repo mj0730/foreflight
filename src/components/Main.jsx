@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 
-import { Divider } from "@mantine/core";
+import { Alert, Divider } from "@mantine/core";
+import { IconAlertCircle } from "@tabler/icons-react";
 
 import Airport from "../components/Airport";
 import Forecast from "../components/Forecast";
@@ -8,7 +9,7 @@ import Forecast from "../components/Forecast";
 import useFetchAirports from "../../hooks/useFetchAirportData";
 import useFetchWx from "../../hooks/useFetchWx";
 
-export default function Main({ id, setAirportName }) {
+export default function Main({ id, setAirportData }) {
   const {
     data: airportData,
     fetchError: airportFetchError,
@@ -21,10 +22,26 @@ export default function Main({ id, setAirportName }) {
   } = useFetchWx(id);
 
   useEffect(() => {
-    if (!airportDataIsLoading) setAirportName(airportData.name);
-  }, [airportDataIsLoading, airportData, setAirportName]);
+    if (!airportDataIsLoading) {
+      setAirportData({ id: airportData.faaCode, name: airportData.name });
+    }
+    return () => setAirportData({});
+  }, [airportDataIsLoading, airportData, setAirportData]);
 
   const { conditions, forecast } = wxData;
+  console.log(airportFetchError);
+  if (airportFetchError) {
+    return (
+      <Alert
+        icon={<IconAlertCircle size="1rem" />}
+        title="Failed to load data"
+        color="red"
+      >
+        Either that airport identifier doesn&apos;t exist, or there was an error
+        loading the data. Please try again.
+      </Alert>
+    );
+  }
 
   return (
     <>

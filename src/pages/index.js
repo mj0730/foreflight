@@ -7,13 +7,14 @@ import Main from "../components/Main";
 import NavHeader from "../components/NavHeader";
 
 export default function Home() {
-  const [searchId, setSearchId] = useState({ value: "" });
-  const [airportName, setAirportName] = useState("");
+  const [searchId, setSearchId] = useState("");
+  const [airportData, setAirportData] = useState({});
+  console.log(searchId);
 
   return (
     <>
       <Head>
-        <title>ForeFlight Exercise</title>
+        <title>ForeFlight Coding Exercise</title>
         <meta
           name="foreflight coding exercise"
           content="Coding exercise for ForeFlight interview"
@@ -27,18 +28,21 @@ export default function Home() {
           { label: "Airport Data", link: "/" },
           { label: "METAR", link: "metar" },
         ]}
+        searchId={searchId}
         setSearchId={setSearchId}
       />
       <Container>
         <Title>
-          {airportName
-            ? `${searchId.value?.toUpperCase()} - ${airportName}`
+          {airportData?.id
+            ? `${airportData.id?.toUpperCase()} - ${airportData.name}`
             : null}
         </Title>
-        {searchId.value ? (
-          <Main id={searchId.value} setAirportName={setAirportName} />
+        {searchId.length >= 3 ? (
+          <Main id={searchId} setAirportData={setAirportData} />
         ) : (
-          "Search for an airport to get started."
+          <>
+            <p>Search for an airport to get started.</p>
+          </>
         )}
       </Container>
     </>

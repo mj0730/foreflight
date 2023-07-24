@@ -22,6 +22,11 @@ export default function useFetchAirports(id) {
 
       try {
         const response = await fetch(url);
+
+        if (response.status !== 200) {
+          throw new Error("There was an error retrieving the data");
+        }
+
         const data = await response.json();
 
         if (isMounted) {
@@ -29,8 +34,6 @@ export default function useFetchAirports(id) {
           setFetchError(null);
         }
       } catch (error) {
-        console.error(error);
-
         if (isMounted) {
           setFetchError(error);
           setData([]);
