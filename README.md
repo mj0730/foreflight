@@ -6,6 +6,13 @@ First, install the required packages:
 npm install
 ```
 
+If running locally, create an .env.local file at the top level directory with the following keys:
+
+```bash
+FF_API_USER=value-from-instructions-doc
+FF_API_KEY=value-from-instructions-doc
+```
+
 Then, run the development server:
 
 ```bash
