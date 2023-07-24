@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   createStyles,
   Header,
@@ -57,7 +56,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function NavHeader({ links, searchId, setSearchId }) {
+export default function NavHeader({ links, setSearchId }) {
   const [opened, { toggle }] = useDisclosure(false);
   const { classes } = useStyles();
 
@@ -89,8 +88,7 @@ export default function NavHeader({ links, searchId, setSearchId }) {
             placeholder="Search"
             icon={<IconSearch size="1rem" stroke={1.5} />}
             limit={5}
-            value={searchId}
-            onChange={setSearchId}
+            onItemSubmit={setSearchId}
             data={["kaus", "kden", "kjfk"]}
             transitionProps={{
               transition: "slide-down",

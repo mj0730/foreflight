@@ -1,11 +1,4 @@
-import {
-  Container,
-  Grid,
-  SimpleGrid,
-  Skeleton,
-  useMantineTheme,
-  rem,
-} from "@mantine/core";
+import { Grid, SimpleGrid, useMantineTheme, rem } from "@mantine/core";
 
 const PRIMARY_COL_HEIGHT = rem(300);
 
@@ -51,7 +44,7 @@ function recRwy(windDir, runwayData) {
 
 export default function Airport({ data, wx: { conditions } }) {
   const theme = useMantineTheme();
-  const SECONDARY_COL_HEIGHT = `calc(${PRIMARY_COL_HEIGHT} / 2 - ${theme.spacing.md} / 2)`;
+  // const SECONDARY_COL_HEIGHT = `calc(${PRIMARY_COL_HEIGHT} / 2 - ${theme.spacing.md} / 2)`;
   const { runways, latitude, longitude } = data;
   const {
     tempC,
