@@ -1,7 +1,7 @@
 import { Grid, SimpleGrid, useMantineTheme, rem } from "@mantine/core";
 
 // const PRIMARY_COL_HEIGHT = rem(300);
-
+//TODO check the preferred rwy, it might be showing opposite
 function convertToFahrenheit(celcius) {
   const temp = (celcius * 9) / 5 + 32;
   return temp.toFixed(1);
@@ -55,9 +55,8 @@ export default function Airport({ data, wx: { conditions } }) {
   } = conditions;
 
   const layers = cloudLayers.map((layer) => {
-    const alt = String(layer.altitudeFt).padStart(3, "0").slice(0, 3);
-    const clouds = `${layer.coverage?.toUpperCase()}${alt}`;
-    return clouds;
+    const alt = String(layer.altitudeFt / 100).padStart(3, 0);
+    return `${layer.coverage?.toUpperCase()}${alt}`;
   });
 
   return (
@@ -72,7 +71,8 @@ export default function Airport({ data, wx: { conditions } }) {
         <div>RH: {relativeHumidity}%</div>
         <div>Visibility: {vis} SM</div>
         <div>
-          Wind: {convertToCompassDir(wind.direction)} {wind.speedKts}kts
+          Wind: {wind.variable ? "VRB" : convertToCompassDir(wind.direction)}{" "}
+          {wind.speedKts}kts
         </div>
         <div>
           Cloud Coverage:{" "}
@@ -99,7 +99,7 @@ export default function Airport({ data, wx: { conditions } }) {
 
         <Grid.Col span={6}>
           <h2>Recommended</h2>
-          <div>{recRwy(wind.direction, runways)}</div>
+          <div>{wind.variable ? "N/A" : recRwy(wind.direction, runways)}</div>
         </Grid.Col>
       </Grid>
     </SimpleGrid>
