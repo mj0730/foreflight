@@ -40,16 +40,16 @@ export default function AirportWx({ conditions }) {
     },
     {
       title: "Wind",
-      value: `${wind.variable ? "VRB" : convertToCompassDir(wind.direction)} ${
-        wind.speedKts
-      }`,
+      value: `${
+        wind.variable ? "VRB" : convertToCompassDir(wind.direction)
+      } ${Math.trunc(wind.speedKts)}`,
       unit: "KTS",
     },
   ];
 
   const wxList = currentWx.map((item) => {
     return (
-      <Paper withBorder p="md" radius="md" key={"temp"}>
+      <Paper withBorder p="md" radius="md" key={item.title}>
         <Group position="apart">
           <Text size="xs" color="dimmed" className={classes.title}>
             {item.title}
@@ -109,13 +109,6 @@ const useStyles = createStyles((theme) => ({
     lineHeight: 1,
     display: "flex",
     alignItems: "center",
-  },
-
-  icon: {
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[3]
-        : theme.colors.gray[4],
   },
 
   title: {

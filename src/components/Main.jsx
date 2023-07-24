@@ -33,7 +33,7 @@ export default function Main({ id, setAirportName }) {
       ) : (
         <>
           <Airport data={airportData} wx={{ conditions }} />
-          <Divider />
+          <Divider size="md" mb={20} />
           <Forecast data={forecast} />
         </>
       )}

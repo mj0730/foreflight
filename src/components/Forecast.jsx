@@ -1,20 +1,4 @@
-import { Title, Stack } from "@mantine/core";
-
-function timeDiff(time) {
-  const currentTime = new Date();
-  const startTime = new Date(time);
-  const totalMinutes = Math.round(
-    (startTime.getTime() - currentTime.getTime()) / 60000,
-  );
-  const hrs = Math.floor(totalMinutes / 60);
-  const mins = totalMinutes % 60;
-  const descH = hrs > 1 ? "hours" : "hour";
-  const descM = mins > 1 ? "minutes" : "minute";
-
-  return `${hrs > 0 ? hrs : null} ${hrs > 0 ? descH : null} ${
-    mins > 0 ? `${mins} ${descM}` : null
-  }`;
-}
+import { Code, Text, Title, Stack } from "@mantine/core";
 
 export default function Forecast({ data }) {
   const [current, forecast1, forecast2] = data.conditions;
@@ -31,17 +15,45 @@ export default function Forecast({ data }) {
 
   return (
     <section>
-      <Title>Forecast</Title>
+      <Title order={2} mb={10}>
+        Forecast
+      </Title>
       <Stack justify="flex-start" spacing="lg" h={300}>
         <div>
-          Becoming in {period1.time}
-          <div>Wind: {`${period1.windDir}${period1.windSpeed}`}</div>
+          Becoming in{" "}
+          <Text span fw={700}>
+            {period1.time}
+          </Text>
+          <div>
+            <Code>Wind: {`${period1.windDir}${period1.windSpeed}`}</Code>
+          </div>
         </div>
         <div>
-          Becoming in {period2.time}
-          <div>Wind: {`${period2.windDir}${period2.windSpeed}`}</div>
+          Becoming in{" "}
+          <Text span fw={700}>
+            {period2.time}
+          </Text>
+          <div>
+            <Code>Wind: {`${period2.windDir}${period2.windSpeed}`}</Code>
+          </div>
         </div>
       </Stack>
     </section>
   );
+}
+
+function timeDiff(time) {
+  const currentTime = new Date();
+  const startTime = new Date(time);
+  const totalMinutes = Math.round(
+    (startTime.getTime() - currentTime.getTime()) / 60000,
+  );
+  const hrs = Math.floor(totalMinutes / 60);
+  const mins = totalMinutes % 60;
+  const descH = hrs > 1 ? "hours" : "hour";
+  const descM = mins > 1 ? "minutes" : "minute";
+
+  return `${hrs > 0 ? hrs : null} ${hrs > 0 ? descH : null} ${
+    mins > 0 ? `${mins} ${descM}` : null
+  }`;
 }
