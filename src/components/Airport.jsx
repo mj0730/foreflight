@@ -1,6 +1,6 @@
 import { Grid, SimpleGrid, useMantineTheme, rem } from "@mantine/core";
 
-const PRIMARY_COL_HEIGHT = rem(300);
+// const PRIMARY_COL_HEIGHT = rem(300);
 
 function convertToFahrenheit(celcius) {
   const temp = (celcius * 9) / 5 + 32;
@@ -51,7 +51,14 @@ export default function Airport({ data, wx: { conditions } }) {
     relativeHumidity,
     wind,
     visibility: { distanceSm: vis },
+    cloudLayers,
   } = conditions;
+
+  const layers = cloudLayers.map((layer) => {
+    const alt = String(layer.altitudeFt).padStart(3, "0").slice(0, 3);
+    const clouds = `${layer.coverage?.toUpperCase()}${alt}`;
+    return clouds;
+  });
 
   return (
     <SimpleGrid
@@ -67,7 +74,14 @@ export default function Airport({ data, wx: { conditions } }) {
         <div>
           Wind: {convertToCompassDir(wind.direction)} {wind.speedKts}kts
         </div>
-        <div>Cloud Coverage</div>
+        <div>
+          Cloud Coverage:{" "}
+          {layers.length > 0
+            ? layers.map((layer) => {
+                return <span key={layer}>{layer}</span>;
+              })
+            : "N/A"}
+        </div>
       </div>
       <Grid gutter="md">
         <Grid.Col>
