@@ -1,7 +1,5 @@
 import { Grid, SimpleGrid, useMantineTheme, rem } from "@mantine/core";
 
-// const PRIMARY_COL_HEIGHT = rem(300);
-//TODO check the preferred rwy, it might be showing opposite
 function convertToFahrenheit(celcius) {
   const temp = (celcius * 9) / 5 + 32;
   return temp.toFixed(1);
@@ -16,7 +14,6 @@ function convertToCompassDir(heading) {
 }
 
 function recRwy(windDir, runwayData) {
-  const recip = (windDir + 180) % 360;
   const runways = [];
   let min = 360;
   let rec = "";
@@ -31,7 +28,7 @@ function recRwy(windDir, runwayData) {
   });
 
   runways.forEach((runway) => {
-    const abs = Math.abs(runway.hdg - recip);
+    const abs = Math.abs(runway.hdg - windDir);
 
     if (abs < min) {
       min = abs;
@@ -67,7 +64,7 @@ export default function Airport({ data, wx: { conditions } }) {
     >
       <div>
         <h2>Current Weather</h2>
-        <div>Temp (&deg;F): {convertToFahrenheit(tempC)}</div>
+        <div>Temp: {convertToFahrenheit(tempC)} &deg;F</div>
         <div>RH: {relativeHumidity}%</div>
         <div>Visibility: {vis} SM</div>
         <div>
@@ -78,7 +75,7 @@ export default function Airport({ data, wx: { conditions } }) {
           Cloud Coverage:{" "}
           {layers.length > 0
             ? layers.map((layer) => {
-                return <span key={layer}>{layer}</span>;
+                return <span key={layer}>{layer} </span>;
               })
             : "N/A"}
         </div>
